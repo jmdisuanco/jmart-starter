@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production postcss public/tailwind.css -o public/global.css webpack",
-    "dev": "cross-env NODE_ENV=development concurrently \"postcss public/tailwind.css -o public/global.css --watch\" \"webpack-dev-server --disable-host-check --content-base public --host 0.0.0.0 --port 9090 \""
+    "dev": "cross-env NODE_ENV=development concurrently \"postcss public/tailwind.css -o public/global.css --watch\" \"webpack-dev-server --allowed-hosts .jmart.cloud --content-base public --host 0.0.0.0 --port 9090 --sockPath /socket \""
   },
   "dependencies": {
     "tailwindcss": "^1.1.4"
