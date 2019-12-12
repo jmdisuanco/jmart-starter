@@ -8,6 +8,7 @@
     "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
     "mini-css-extract-plugin": "^0.6.0",
+    "npm-install-webpack-plugin": "^4.0.5",
     "postcss-cli": "^6.1.2",
     "serve": "^11.0.0",
     "style-loader": "^0.23.1",
@@ -20,7 +21,8 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production postcss public/tailwind.css -o public/global.css webpack",
-    "dev": "cross-env NODE_ENV=development concurrently \"postcss public/tailwind.css -o public/global.css --watch\" \"webpack-dev-server --hot --allowed-hosts .jmart.cloud --content-base public --host 0.0.0.0 --port 9090 --sockPath /socket \""
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run genRoute\" \"postcss public/tailwind.css -o public/global.css --watch\" \"webpack-dev-server --hot --allowed-hosts .jmart.cloud --content-base public --host 0.0.0.0 --port 9090 --sockPath /socket \"",
+    "genRoute": "node ./bin/genRoutes -w"
   },
   "dependencies": {
     "tailwindcss": "^1.1.4"
