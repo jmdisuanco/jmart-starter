@@ -14,12 +14,15 @@ const JMartdevServer = () => {
   }
 
   let Handshake = (ctx) => {
-    //ctx.ws.send(`Connected via url${ctx.req.getUrl()}`)
-    ctx.ws.send('Welcome to JMArt Svelte REPL Server')
+    let payload = { msg: 'text', data: 'Welcome to JMArt Svelte REPL Server' }
+    ctx.ws.send(payload)
   }
   let WSClose = (ctx) => {
-    //ctx.ws.send(`Connected via url${ctx.req.getUrl()}`)
-    ctx.ws.send('disconnected from JMArt Svelte REPL Server')
+    let payload = {
+      msg: 'text',
+      data: 'disconnected from JMArt Svelte REPL Server',
+    }
+    ctx.ws.send(payload)
   }
 
   let WSMessage = (ctx) => {
@@ -28,12 +31,13 @@ const JMartdevServer = () => {
 
       system.stdout
         .on('data', (data) => {
-          console.log(data + '\r\n')
-          ctx.ws.send(data.toString() + '\r\n')
+          let payload = { msg: 'system', data: data.toString() }
+          ctx.ws.send(payload)
         })
 
         .on('error', (msg) => {
-          console.log(msg)
+          let payload = { msg: 'error', data: msg }
+          ctx.ws.send(payload)
         })
     }
 
@@ -55,15 +59,13 @@ const JMartdevServer = () => {
           run(`npm uninstall ${message[1]}`)
           break
         }
-        case 'list':
-          {
-            const pkg = fs.readFileSync('./package.json').toString()
-            let result = JSON.parse(pkg)
-            ctx.ws.send(JSON.stringify(result.dependencies))
-            break
-          }
-
-          let ok = ctx.ws.send(data.toUpperCase(), ctx.isBinary)
+        case 'list': {
+          const pkg = fs.readFileSync('./package.json').toString()
+          let result = JSON.parse(pkg)
+          let payload = { msg: 'installed', data: result.dependencies }
+          ctx.ws.send(JSON.stringify(payload))
+          break
+        }
       }
     } catch (e) {
       console.log(e)
@@ -72,7 +74,6 @@ const JMartdevServer = () => {
   let routes = [
     {
       url: '/',
-      GET: HelloWorld,
       ws: {
         options: {
           compression: 0,
