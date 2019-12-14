@@ -25,7 +25,7 @@ const JMartdevServer = () => {
     ctx.ws.send(JSON.stringify(payload))
   }
 
-  const List = () => {
+  const List = (ctx) => {
     const pkg = fs.readFileSync('./package.json').toString()
     let result = JSON.parse(pkg)
     let payload = { msg: 'installed', data: result.dependencies }
@@ -39,7 +39,7 @@ const JMartdevServer = () => {
         .on('data', (data) => {
           let payload = { msg: 'system', data: data.toString() }
           ctx.ws.send(JSON.stringify(payload))
-          List()
+          List(ctx)
         })
 
         .on('error', (msg) => {
@@ -67,7 +67,7 @@ const JMartdevServer = () => {
           break
         }
         case 'list': {
-          List()
+          List(ctx)
           break
         }
       }
