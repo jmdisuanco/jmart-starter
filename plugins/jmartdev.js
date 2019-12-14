@@ -89,7 +89,7 @@ const JMartdevServer = () => {
   ]
 
   let options = {
-    port: 3000,
+    port: 9999,
     routes: routes,
   }
 
@@ -99,7 +99,7 @@ const JMartdevServer = () => {
 class JMartDev {
   apply(compiler) {
     //console.log(compiler.hooks.failed.tap)
-    compiler.hooks.done.tap({ name: 'HelloWorld' }, () => {
+    compiler.hooks.done.tap({ name: 'JMartDevServer' }, () => {
       JMartdevServer()
     })
   }
