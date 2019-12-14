@@ -1,5 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HelloWorld = require('./plugins/hello')
+const JMartDev = require('./plugins/jmartdev')
 
 const path = require('path')
 
@@ -63,7 +63,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
-    new HelloWorld(),
+    new JMartDev(),
   ],
   devtool: prod ? false : 'source-map',
 }
