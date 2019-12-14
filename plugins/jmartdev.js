@@ -15,16 +15,22 @@ const JMartdevServer = () => {
 
   let Handshake = (ctx) => {
     let payload = { msg: 'text', data: 'Welcome to JMArt Svelte REPL Server' }
-    ctx.ws.send(payload)
+    ctx.ws.send(JSON.stringify(payload))
   }
   let WSClose = (ctx) => {
     let payload = {
       msg: 'text',
       data: 'disconnected from JMArt Svelte REPL Server',
     }
-    ctx.ws.send(payload)
+    ctx.ws.send(JSON.stringify(payload))
   }
 
+  const List = () => {
+    const pkg = fs.readFileSync('./package.json').toString()
+    let result = JSON.parse(pkg)
+    let payload = { msg: 'installed', data: result.dependencies }
+    ctx.ws.send(JSON.stringify(payload))
+  }
   let WSMessage = (ctx) => {
     const run = (cmd, params = []) => {
       const system = spawn(cmd, params, { shell: true })
@@ -32,12 +38,13 @@ const JMartdevServer = () => {
       system.stdout
         .on('data', (data) => {
           let payload = { msg: 'system', data: data.toString() }
-          ctx.ws.send(payload)
+          ctx.ws.send(JSON.stringify(payload))
+          List()
         })
 
         .on('error', (msg) => {
           let payload = { msg: 'error', data: msg }
-          ctx.ws.send(payload)
+          ctx.ws.send(JSON.stringify(payload))
         })
     }
 
@@ -60,10 +67,7 @@ const JMartdevServer = () => {
           break
         }
         case 'list': {
-          const pkg = fs.readFileSync('./package.json').toString()
-          let result = JSON.parse(pkg)
-          let payload = { msg: 'installed', data: result.dependencies }
-          ctx.ws.send(JSON.stringify(payload))
+          List()
           break
         }
       }
