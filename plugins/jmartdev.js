@@ -1,4 +1,4 @@
-const { exec, spawn } = require('child_process')
+const { spawn } = require('child_process')
 const fs = require('fs')
 
 const JMartdevServer = () => {
@@ -49,7 +49,6 @@ const JMartdevServer = () => {
     }
 
     try {
-      console.log('--->', ctx.ws.getRemoteAddress())
       let data = Buffer.from(ctx.message).toString('binary')
 
       let message = data.toString().split(' ')
