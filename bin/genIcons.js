@@ -27,7 +27,7 @@ const generateIcons = () =>{
     let size = i.split('-')[1].split('x')
     icon
       .resize(parseInt(size[0]), parseInt(size[1]))
-      .toFile(`${process.cwd()}/public/${i}.png`)
+      .toFile(`${process.cwd()}/bundled/${i}.png`)
   } )
    
 };

@@ -22,11 +22,12 @@
     "workbox-webpack-plugin": "^4.3.1"
   },
   "scripts": {
-    "build": "npm run genIcons && cross-env NODE_ENV=production postcss public/tailwind.css -o public/global.css && webpack --config webpack.build.config.js",
+    "build": "npm run clonePublic && npm run genIcons && cross-env NODE_ENV=production postcss public/tailwind.css -o bundled/global.css && webpack --config webpack.build.config.js",
     "dev": "cross-env NODE_ENV=development concurrently \"npm run genRoute\"    \"postcss public/tailwind.css -o public/global.css --watch\" \"webpack-dev-server --hot --allowed-hosts .jmart.cloud --content-base public --host 0.0.0.0 --port 9090 --sockPath /socket \"",
     "local": "cross-env NODE_ENV=development concurrently \"npm run genRoute\"   \"postcss public/tailwind.css -o public/global.css --watch\" \"webpack-dev-server --hot --content-base public  --config webpack.local.config.js \"",
     "genRoute": "node ./bin/genRoutes -w",
-    "genIcons": "node ./bin/genIcons"
+    "genIcons": "node ./bin/genIcons",
+    "clonePublic": "node ./bin/clonepublic"
   },
   "dependencies": {
     "tailwindcss": "^1.1.4"
