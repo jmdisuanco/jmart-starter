@@ -1,4 +1,17 @@
 {
-"host":"",
-"user":""
+"host":"localhost:9090",
+"user":"",
+"manifest":{
+    "name": "JMart PWA",
+    "short_name": "JMart",
+    "description": "My awesome Progressive Web App!",
+    "background_color": "#ffffff",
+    "crossorigin": "",
+    "icons": [
+      {
+        "src": "public/favicon.png",
+        "sizes": [96, 128, 192, 256, 384, 512]
+      }
+    ]
+  }
 }

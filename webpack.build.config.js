@@ -1,7 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const JMartDev = require('./plugins/jmartdev')
 const config = require('./jmart.config.json')
 const path = require('path')
+const { GenerateSW } = require('workbox-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
@@ -73,7 +73,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
-    new JMartDev(),
+    new GenerateSW(),
   ],
-  devtool: prod ? false : 'source-map',
+  //devtool: prod ? false : 'source-map',
 }

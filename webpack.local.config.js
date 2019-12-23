@@ -10,16 +10,7 @@ module.exports = {
   entry: {
     bundle: ['./src/main.js'],
   },
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    allowedHosts: [config.host],
-    hot: true,
-    host: '0.0.0.0',
-    public: config.host,
-    sockPath: 'hmr',
-    compress: true,
-    port: 9090,
-  },
+
   resolve: {
     alias: {
       svelte: path.resolve('node_modules', 'svelte'),
