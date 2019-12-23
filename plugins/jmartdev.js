@@ -69,6 +69,10 @@ const JMartdevServer = () => {
           List(ctx)
           break
         }
+        case 'build': {
+          run(`npm run build`)
+          break
+        }
       }
     } catch (e) {
       console.log(e)
