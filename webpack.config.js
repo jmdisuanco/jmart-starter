@@ -3,6 +3,7 @@ const JMartDev = require('./plugins/jmartdev')
 const config = require('./jmart.config.json')
 const path = require('path')
 
+
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 

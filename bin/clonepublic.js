@@ -4,7 +4,7 @@ const fs = require('fs-extra')
 
 const cloneProject = () =>{
   let src = `${process.cwd()}/public`
-  let dest = `${process.cwd()}/bundled`
+  let dest = `${process.cwd()}/dist`
   fs.copySync(src, dest)
 
 

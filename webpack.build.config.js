@@ -1,7 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const config = require('./jmart.config.json')
 const path = require('path')
-const { GenerateSW } = require('workbox-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
@@ -28,7 +27,7 @@ module.exports = {
     mainFields: ['svelte', 'browser', 'module', 'main'],
   },
   output: {
-    path: __dirname + '/bundled',
+    path: __dirname + '/dist',
     filename: '[name].js',
     chunkFilename: '[name].[id].js',
   },
@@ -73,7 +72,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
-    new GenerateSW(),
   ],
   //devtool: prod ? false : 'source-map',
 }

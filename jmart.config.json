@@ -13,5 +13,10 @@
         "sizes": [96, 128, 192, 256, 384, 512]
       }
     ]
-  }
+  },
+  "workbox":{
+              "swSrc": "src/sw.js",
+              "swDest": "dist/sw.js",
+              "globDirectory": "dist"
+            }
 }
